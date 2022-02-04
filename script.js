@@ -65,10 +65,23 @@ async function addToCart(event) {
   items.appendChild(createCartItemElement(productsOnCart));
 }
 
-window.onload = async () => {
-  await screenProducts();
-  const btns = document.querySelectorAll('.item__add');
-  btns.forEach((button) => {
-    button.addEventListener('click', addToCart);
+const clearCart = () => {
+  const items = document.querySelectorAll('.cart__item');
+  items.forEach((item) => {
+    item.remove();
   });
 };
+
+// async function totalPrice() {
+
+    // }
+    
+    window.onload = async () => {
+      await screenProducts();
+      const btns = document.querySelectorAll('.item__add');
+      btns.forEach((button) => {
+        button.addEventListener('click', addToCart);
+      });
+      const btnC = document.querySelector('.empty-cart');
+      btnC.addEventListener('click', clearCart);
+    };

@@ -39,9 +39,20 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
+function createMsg(msg) {
+  const pMsg = createCustomElement('p', 'loading', 'Carregando...');
+  msg.appendChild(pMsg);
+}
+
+function delMsg(del) {
+  const getMsg = document.querySelector('.loading');
+  del.removeChild(getMsg);
+}
 async function screenProducts() {
   const items = document.querySelector('.items');
+  createMsg(items);
   const data = await fetchProducts('computador');
+  delMsg(items);
   const products = data.results;
   products.forEach((product) => {
     const productsOnScreen = {
@@ -71,10 +82,6 @@ const clearCart = () => {
     item.remove();
   });
 };
-
-// async function totalPrice() {
-
-    // }
 window.onload = async () => {
   await screenProducts();
   const btns = document.querySelectorAll('.item__add');

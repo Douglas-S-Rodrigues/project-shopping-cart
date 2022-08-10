@@ -69,7 +69,7 @@ async function addToCart(event) {
   const itemId = event.target.parentNode.firstChild.innerHTML;
   const response = await fetchItem(itemId);
   const productsOnCart = {
-    sku: response.id,
+    sku: response.id, 
     name: response.title,
     salePrice: response.price,
   };
